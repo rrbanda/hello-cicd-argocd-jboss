@@ -15,8 +15,8 @@ spec:
       default: Dockerfile
       type: string
     - name: internal-registry
-      description: URL of the internal OpenShift Registry
-      default: default-route-openshift-image-registry.apps.cluster-f4mdr.sandbox586.opentlc.com
+      description: URL of the internal Openshift Registry
+      default: default-route-openshift-image-registry.apps.cndsno3.cee.ral3.lab.eng.rdu2.redhat.com
       type: string
     - name: namespace
       description: Namespace where the image will be pushed
@@ -28,12 +28,6 @@ spec:
       type: string
       
   steps:
-    - name: login-to-internal-registry
-      image: $(params.buildah-image)
-      script: |
-        # Log in to the OpenShift internal registry using buildah
-        buildah login --tls-verify=false -u admin -p sha256~0pHKY4Y7EJzVWjzXzWam84ndAcD1IJOxPPp3hVXvkU4 $(params.internal-registry)
-        
     - name: build-image-and-push-to-internal-registry
       image: $(params.buildah-image)
       workingDir: $(workspaces.source.path)/code
@@ -53,6 +47,7 @@ spec:
           value: $(params.namespace)
       script: |
         # Setting the VFS Storage Driver allows us to run Buildah in a non-privileged container
+        # More information found here: https://docs.docker.com/storage/storagedriver/vfs-driver/
         BUILDAH_OPTS="--storage-driver=vfs"
         buildah ${BUILDAH_OPTS} bud -f ${DOCKERFILE_PATH} -t ${IMAGE_NAME}
         
@@ -64,5 +59,5 @@ spec:
         buildah ${BUILDAH_OPTS} tag ${IMAGE_NAME} ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:latest
         buildah ${BUILDAH_OPTS} push --tls-verify=false --cert-dir="/tekton-custom-certs" ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:latest
   workspaces:
-    - description: Persistence Storage between Pods.
+    - description: Persistance Storage between Pods.
       name: source
