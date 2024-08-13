@@ -16,7 +16,7 @@ spec:
       type: string
     - name: internal-registry
       description: URL of the internal Openshift Registry
-      default: default-route-openshift-image-registry.apps.cndsno3.cee.ral3.lab.eng.rdu2.redhat.com
+      default: image-registry-openshift-image-registry.apps.cluster-f4mdr.sandbox586.opentlc.com
       type: string
     - name: namespace
       description: Namespace where the image will be pushed
