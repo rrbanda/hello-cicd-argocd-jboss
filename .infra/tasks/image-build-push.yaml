@@ -53,7 +53,7 @@ spec:
 
         # Login to registry
 
-        podman login -u admin -p $(oc whoami -t) default-route-openshift-image-registry.apps.cluster-f4mdr.sandbox586.opentlc.com
+        podman login -u admin -p sha256~0pHKY4Y7EJzVWjzXzWam84ndAcD1IJOxPPp3hVXvkU4 default-route-openshift-image-registry.apps.cluster-f4mdr.sandbox586.opentlc.com
         
         # Push Tagged Version with Commit SHA
         podman tag ${IMAGE_NAME} ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
