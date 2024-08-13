@@ -50,18 +50,14 @@ spec:
         # More information found here: https://docs.docker.com/storage/storagedriver/vfs-driver/
         BUILDAH_OPTS="--storage-driver=vfs"
         buildah ${BUILDAH_OPTS} bud -f ${DOCKERFILE_PATH} -t ${IMAGE_NAME}
-
-        # Login to registry
-
-        podman login -u admin -p sha256~0pHKY4Y7EJzVWjzXzWam84ndAcD1IJOxPPp3hVXvkU4 default-route-openshift-image-registry.apps.cluster-f4mdr.sandbox586.opentlc.com
         
         # Push Tagged Version with Commit SHA
-        podman tag ${IMAGE_NAME} ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
-        podman push ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
+        buildah ${BUILDAH_OPTS} tag ${IMAGE_NAME} ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
+        buildah ${BUILDAH_OPTS} push --tls-verify=false --cert-dir="/tekton-custom-certs" ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:${IMAGE_TAG}
 
         # Push Latest Tag
-        podman tag ${IMAGE_NAME} ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:latest
-        podman push ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:latest
+        buildah ${BUILDAH_OPTS} tag ${IMAGE_NAME} ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:latest
+        buildah ${BUILDAH_OPTS} push --tls-verify=false --cert-dir="/tekton-custom-certs" ${INTERNAL_REGISTRY}/${NAMESPACE}/${IMAGE_NAME}:latest
   workspaces:
     - description: Persistance Storage between Pods.
       name: source
