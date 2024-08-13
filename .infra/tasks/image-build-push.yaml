@@ -31,8 +31,8 @@ spec:
     - name: login-to-internal-registry
       image: $(params.buildah-image)
       script: |
-        # Log in to the OpenShift internal registry using hardcoded credentials
-        podman login -u admin -p MTY2MzUz $(params.internal-registry)
+        # Log in to the OpenShift internal registry using buildah
+        buildah login --tls-verify=false -u admin -p MTY2MzUz $(params.internal-registry)
         
     - name: build-image-and-push-to-internal-registry
       image: $(params.buildah-image)
