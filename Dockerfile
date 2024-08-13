@@ -1,6 +1,6 @@
 FROM --platform=linux/x86_64 quay.io/rhn_support_abaral1/eap:7.4.14
 
-MAINTAINER "Anilabha Baral" "anilabha911@gmail.com"
+MAINTAINER "Raghuram Banda" "rbanda@redhat.com"
 
 COPY target/helloworld.war $JBOSS_HOME/standalone/deployments/
 
