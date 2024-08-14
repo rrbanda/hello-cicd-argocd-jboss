@@ -1,4 +1,4 @@
-# Build and Deploy maven application into JBoss EAP 7.4 using Openshift PipeLine(CI) and ArgoCD(CD) in Red Hat OpenShift(RHOCP)
+# Build and Deploy maven application into JBoss EAP 7.4 using Openshift PipeLine(CI) and ArgoCD(CD) in Red Hat OpenShift
 
 
 ## In this project i used Openshift pipeline as a CI tool to build the maven project and image and used ArgoCD as a CD tool to deploy this "Hello World" maven application into JBoss EAP 7.4.
