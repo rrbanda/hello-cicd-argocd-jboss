@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
-  name: new-pipeline
+  name: jboss-pipeline
 spec:
   tasks:
   - name: git-clone
