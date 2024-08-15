@@ -88,7 +88,7 @@ jboss-helloworld-service-route   jboss-helloworld-service-eap-test-02.apps.xxxx.
 
 ```
 21. Access the application using following URL `<ROUTE_URL>/helloworld` in a browser:
-![fig-13](https://github.com/rrbanda/hello-cicd-argocd-jboss/blob/main/screenshots/application.png)
+![fig-13](https://github.com/rrbanda/hello-cicd-argocd-jboss/blob/main/screenshots/hw.png)
 
 ## To do item
 
